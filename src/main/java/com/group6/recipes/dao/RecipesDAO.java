@@ -10,7 +10,7 @@ public interface RecipesDAO {
     public List<Recipe> getAllRecipes() throws SQLException;
     public Recipe getRecipeById(int recipeId) throws SQLException;
     public void updateRecipe(Recipe recipe) throws SQLException;
-    public void deleteRecipe(int recipeId, int userId) throws SQLException;
+    public void deleteRecipe(int recipeId) throws SQLException;
     public List<Recipe> getRecipesByUser(int userId) throws SQLException;
 
 }

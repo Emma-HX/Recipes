@@ -5,9 +5,11 @@ import com.group6.recipes.dao.RecipesDAOImpl;
 import com.group6.recipes.model.Recipe;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 
+@WebServlet("/editRecipe")
 public class RecipeEditServlet extends HttpServlet {
     private RecipesDAOImpl recipesDAO = new RecipesDAOImpl();
 
@@ -17,7 +19,7 @@ public class RecipeEditServlet extends HttpServlet {
         try {
             Recipe recipe = recipesDAO.getRecipeById(recipeId);
             req.setAttribute("recipe", recipe);
-            req.getRequestDispatcher("/WEB-INF/views/edit_recipe.jsp").forward(req, resp);
+            req.getRequestDispatcher("/edit_recipe.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new ServletException(e);
         }

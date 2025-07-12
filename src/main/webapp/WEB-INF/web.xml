@@ -4,13 +4,4 @@
                              https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-    <servlet>
-        <servlet-name>RecipeListServlet</servlet-name>
-        <servlet-class>com.group6.recipes.controller.RecipeListServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RecipeListServlet</servlet-name>
-        <url-pattern>/recipes</url-pattern>
-    </servlet-mapping>
-
 </web-app>

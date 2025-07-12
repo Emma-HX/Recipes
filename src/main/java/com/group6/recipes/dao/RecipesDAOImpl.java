@@ -28,8 +28,7 @@ public class RecipesDAOImpl implements RecipesDAO {
 
     /**
      * get all recipes list
-     * @return
-     * @throws SQLException
+     * @return Recipes list
      */
     public List<Recipe> getAllRecipes() throws SQLException {
         List<Recipe> list = new ArrayList<>();
@@ -46,6 +45,7 @@ public class RecipesDAOImpl implements RecipesDAO {
                 r.setPrepSteps(rs.getString("prepSteps"));
                 r.setCreatedAt(rs.getTimestamp("created_at"));
                 r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                r.setImagePath(rs.getString("image_path"));
                 list.add(r);
             }
         }
@@ -73,6 +73,7 @@ public class RecipesDAOImpl implements RecipesDAO {
                     r.setPrepSteps(rs.getString("prepSteps"));
                     r.setCreatedAt(rs.getTimestamp("created_at"));
                     r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    r.setImagePath(rs.getString("image_path"));
                     return r;
                 }
             }
@@ -101,15 +102,17 @@ public class RecipesDAOImpl implements RecipesDAO {
     /**
      * delete recipe
      * @param recipeId
-     * @param userId
      * @throws SQLException
      */
-    public void deleteRecipe(int recipeId, int userId) throws SQLException {
-        String sql = "DELETE FROM recipes WHERE recipe_id=? AND user_id=?";
+    public void deleteRecipe(int recipeId) throws SQLException {
+        RecipeIngredientDAOImpl recipeIngredientDAO = new RecipeIngredientDAOImpl();
+        RecipeCategoryDAOImpl recipeCategoryDAO = new RecipeCategoryDAOImpl();
+        recipeIngredientDAO.deleteByRecipe(recipeId);
+        recipeCategoryDAO.deleteByRecipe(recipeId);
+        String sql = "DELETE FROM recipes WHERE recipe_id=?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, recipeId);
-            ps.setInt(2, userId);
             ps.executeUpdate();
         }
     }

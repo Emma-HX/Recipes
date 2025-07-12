@@ -16,7 +16,7 @@ public class DBUtil {
             url = prop.getProperty("jdbc.url");
             username = prop.getProperty("jdbc.username");
             password = prop.getProperty("jdbc.password");
-            Class.forName(prop.getProperty("com.mysql.cj.jdbc.Driver"));
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception e) {
             e.printStackTrace();
         }

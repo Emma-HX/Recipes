@@ -10,7 +10,7 @@ public class Recipe {
     private String prepSteps;
     private Date createdAt;
     private Date updatedAt;
-
+    private String imagePath;
 
     public int getRecipeId() {
         return recipeId;
@@ -66,5 +66,13 @@ public class Recipe {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
