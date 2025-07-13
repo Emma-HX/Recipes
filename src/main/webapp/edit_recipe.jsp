@@ -68,6 +68,7 @@
           List<Ingredient> allIngredients = (List<Ingredient>)request.getAttribute("ingredients");
           List<Unit> units = (List<Unit>)request.getAttribute("units");
           List<RecipeIngredient> recipeIngredients = (List<RecipeIngredient>)request.getAttribute("recipeIngredients");
+          List<Category> allCategories = (List<Category>) request.getAttribute("categories");
           if (recipeIngredients != null && !recipeIngredients.isEmpty()) {
             for (RecipeIngredient ri : recipeIngredients) {
         %>
