@@ -77,7 +77,7 @@
       </div>
     </div>
   </div>
-  <a href="recipes" class="btn btn-secondary mt-4">Return to List</a>
+  <a href="recipesList" class="btn btn-secondary mt-4">Return to List</a>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@ package com.group6.recipes.model;
 public class RecipeCategory {
     private int recipeId;
     private int categoryId;
-
+    private String categoryName;
     public int getRecipeId() {
         return recipeId;
     }
@@ -18,5 +18,13 @@ public class RecipeCategory {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
