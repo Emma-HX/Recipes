@@ -87,14 +87,15 @@ public class RecipesDAOImpl implements RecipesDAO {
      * @throws SQLException
      */
     public void updateRecipe(Recipe recipe) throws SQLException {
-        String sql = "UPDATE recipes SET title=?, description=?, prepSteps=? WHERE recipe_id=? AND user_id=?";
+        String sql = "UPDATE recipes SET title=?, description=?, prepSteps=?, image_path=? WHERE recipe_id=?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, recipe.getTitle());
             ps.setString(2, recipe.getDescription());
             ps.setString(3, recipe.getPrepSteps());
-            ps.setInt(4, recipe.getRecipeId());
-            ps.setInt(5, recipe.getUserId());
+            ps.setString(4, recipe.getImagePath());
+            ps.setInt(5, recipe.getRecipeId());
+        //    ps.setInt(6, recipe.getUserId());
             ps.executeUpdate();
         }
     }
@@ -139,6 +140,34 @@ public class RecipesDAOImpl implements RecipesDAO {
                     r.setPrepSteps(rs.getString("prepSteps"));
                     r.setCreatedAt(rs.getTimestamp("created_at"));
                     r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    list.add(r);
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Recipe> getRecipesByCategory(int categoryId) throws SQLException {
+        List<Recipe> list = new ArrayList<>();
+        String sql = "select *\n" +
+                "from recipes as r\n" +
+                "inner join recipe_categories as rc on r.recipe_id = rc.recipe_id\n" +
+                "where rc.category_id = ? ORDER BY created_at DESC";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Recipe r = new Recipe();
+                    r.setRecipeId(rs.getInt("recipe_id"));
+                    r.setUserId(rs.getInt("user_id"));
+                    r.setTitle(rs.getString("title"));
+                    r.setDescription(rs.getString("description"));
+                    r.setPrepSteps(rs.getString("prepSteps"));
+                    r.setCreatedAt(rs.getTimestamp("created_at"));
+                    r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    r.setImagePath(rs.getString("image_path"));
                     list.add(r);
                 }
             }

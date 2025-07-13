@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface RecipeCategoryDAO {
     public void addRecipeCategory(RecipeCategory rc) throws SQLException;
+    public void updateRecipeCategory(RecipeCategory rc) throws SQLException;
     public List<RecipeCategory> getCategoriesByRecipe(int recipeId) throws SQLException;
     public void deleteByRecipe(int recipeId) throws SQLException;
 } 

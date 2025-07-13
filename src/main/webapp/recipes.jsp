@@ -1,6 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Xue Han
+  Date: 7/11/2025
+  Time: 9:25 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.group6.recipes.model.Recipe" %>
+<%@ page import="com.group6.recipes.model.Category" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,12 +51,18 @@
                 </form>
                 <h6>Categories</h6>
                 <div class="category-list">
-                    <span>APPETIZERS</span>
-                    <span>BREAKFAST</span>
-                    <span>SNACKS</span>
-                    <span>LUNCH</span>
-                    <span>DESSERTS</span>
-                    <span>KIDS MEALS</span>
+                    <%
+                        List<Category> allCategories = (List<Category>) request.getAttribute("categories");
+                        if (allCategories != null) {
+                            for (Category c : allCategories) {
+                    %>
+                    <a href="recipesList?categoryId=<%=c.getCategoryId()%>" class="d-block mb-1"><%= c.getName() %></a>
+                    <%
+                            }
+                        }
+                    %>
+                    <a href="recipesList" class="d-block mb-1">All Recipes</a>
+
                 </div>
             </div>
         </div>

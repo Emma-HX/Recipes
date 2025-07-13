@@ -1,8 +1,8 @@
 package com.group6.recipes.model;
 
 public class RecipeIngredient {
+    private int id;
     private int recipeId;
-    private int ingredientId;
     private String ingredientName;
     private String UnitName;
     private double quantity;
@@ -14,14 +14,6 @@ public class RecipeIngredient {
 
     public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
-    }
-
-    public int getIngredientId() {
-        return ingredientId;
-    }
-
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
     }
 
     public double getQuantity() {
@@ -54,5 +46,13 @@ public class RecipeIngredient {
 
     public void setUnitName(String unitName) {
         UnitName = unitName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

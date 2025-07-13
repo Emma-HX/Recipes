@@ -1,7 +1,6 @@
 package com.group6.recipes.dao;
 
 import com.group6.recipes.model.Category;
-import com.group6.recipes.model.Ingredient;
 import com.group6.recipes.util.DBUtil;
 
 import java.sql.Connection;
