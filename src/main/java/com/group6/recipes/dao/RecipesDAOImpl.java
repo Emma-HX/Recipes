@@ -174,4 +174,59 @@ public class RecipesDAOImpl implements RecipesDAO {
         }
         return list;
     }
+
+    @Override
+    public List<Recipe> searchRecipes(String keyword, String category) throws SQLException {
+        List<Recipe> list = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(
+                "SELECT DISTINCT r.* FROM recipes r " +
+                        "LEFT JOIN recipe_categories rc ON r.recipe_id = rc.recipe_id " +
+                        "LEFT JOIN categories c ON rc.category_id = c.category_id " +
+                        "WHERE 1=1"
+        );
+
+
+        List<Object> parameters = new ArrayList<>();
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql.append(" AND (r.title LIKE ? OR r.description LIKE ? OR r.prepSteps LIKE ?)");
+            String likeKeyword = "%" + keyword.trim() + "%";
+            parameters.add(likeKeyword);
+            parameters.add(likeKeyword);
+            parameters.add(likeKeyword);
+        }
+
+        if (category != null && !category.trim().isEmpty()) {
+            sql.append(" AND c.name = ?");
+            parameters.add(category.trim());
+        }
+
+        sql.append(" ORDER BY r.created_at DESC");
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < parameters.size(); i++) {
+                ps.setObject(i + 1, parameters.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Recipe r = new Recipe();
+                    r.setRecipeId(rs.getInt("recipe_id"));
+                    r.setUserId(rs.getInt("user_id"));
+                    r.setTitle(rs.getString("title"));
+                    r.setDescription(rs.getString("description"));
+                    r.setPrepSteps(rs.getString("prepSteps"));
+                    r.setCreatedAt(rs.getTimestamp("created_at"));
+                    r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    r.setImagePath(rs.getString("image_path"));
+                    list.add(r);
+                }
+            }
+        }
+
+        return list;
+    }
+
 }

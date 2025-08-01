@@ -13,4 +13,5 @@ public interface RecipesDAO {
     public void deleteRecipe(int recipeId) throws SQLException;
     public List<Recipe> getRecipesByUser(int userId) throws SQLException;
     public List<Recipe> getRecipesByCategory(int categoryId) throws SQLException;
+    public List<Recipe> searchRecipes(String keyword, String category) throws SQLException;
 }
