@@ -13,8 +13,11 @@
 <body>
 <div class="container mt-4">
     <h2>Search Recipes</h2>
-    <form action="search" method="get" class="row g-3">
-        <div class="col-md-6">
+    <p>DEBUG - contextPath = <%= request.getContextPath() %></p>
+    <form action="<%= request.getContextPath() %>/search" method="get" class="row g-3">
+
+
+    <div class="col-md-6">
             <input type="text" name="keyword" class="form-control" placeholder="Enter keyword..." />
         </div>
         <div class="col-md-4">
