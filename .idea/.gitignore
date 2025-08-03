@@ -6,3 +6,35 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.iml
+*.ipr
+*.iws
+*.idea/
+target/
+out/
+build/
+logs/
+*.swp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IntelliJ
+
+.idea/
+
+# Maven
+log/
+.mvn/
+!src/main/resources/
+!src/test/resources/
+
+# Database credentials (if any)
+*.properties

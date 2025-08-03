@@ -45,9 +45,8 @@
             </div>
             <div class="sidebar">
                 <h5>Recipe Search</h5>
-                <form action="<%= request.getContextPath() %>/search" method="get" class="mb-3 d-flex">
-
-                <input type="text" class="form-control me-2" name="keyword" placeholder="Search...">
+                <form action="recipes" method="get" class="mb-3 d-flex">
+                    <input type="text" class="form-control me-2" name="keyword" placeholder="Search...">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
                 <h6>Categories</h6>
