@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface RecipesDAO {
-    public void addRecipe(Recipe recipe) throws SQLException;
+    public int addRecipe(Recipe recipe) throws SQLException;
     public List<Recipe> getAllRecipes() throws SQLException;
     public Recipe getRecipeById(int recipeId) throws SQLException;
     public void updateRecipe(Recipe recipe) throws SQLException;
