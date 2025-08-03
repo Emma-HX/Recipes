@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="mb-3">
-                <a href="create_recipe.jsp" class="btn btn-outline-primary w-100">Create a Recipe</a>
+                <a href="create_recipe" class="btn btn-outline-primary w-100">Create a Recipe</a>
             </div>
             <div class="sidebar">
                 <h5>Recipe Search</h5>
@@ -78,8 +78,14 @@
                 <div class="col">
                     <a href="viewRecipe?id=<%=r.getRecipeId()%>" style="text-decoration:none; color:inherit;">
                         <div class="card h-100 shadow-sm">
-                            <img src="<%= (r.getImagePath() != null && !r.getImagePath().isEmpty()) ? request.getContextPath() + r.getImagePath() : "https://via.placeholder.com/400x250?text=No+Image" %>"
-                                 class="card-img-top" alt="Recipe Image" style="height:220px; object-fit:cover;">
+                            <img src="<%=
+    (r.getImagePath() != null && !r.getImagePath().isEmpty())
+        ? (r.getImagePath().startsWith("http")
+            ? r.getImagePath()
+            : request.getContextPath() + r.getImagePath())
+        : "https://via.placeholder.com/400x250?text=No+Image"
+%>" alt="Recipe Image" width="400" height="250">
+
                             <div class="card-body">
                                 <h5 class="card-title text-center"><%=r.getTitle()%></h5>
                             </div>
