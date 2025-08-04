@@ -108,16 +108,10 @@
     <a href="create_recipe" class="btn btn-primary mb-3">Create New Recipe</a>
     <% } %>
 
-    <form action="create_recipe" method="post">
-
+    <form action="create_recipe" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label class="form-label">Image URL</label>
-            <input type="url" class="form-control" name="imageUrl" placeholder="https://example.com/image.jpg" required>
-            <div class="form-text text-muted">
-                Need a free image? Visit
-                <a href="https://unsplash.com/s/photos/food" target="_blank">Unsplash</a>,
-                right-click on a food photo and select <em>"Copy image link"</em>.
-            </div>
+            <label class="form-label">Upload image</label>
+            <input type="file" class="form-control" name="imageFile" accept="image/*">
         </div>
 
         <div class="mb-3">

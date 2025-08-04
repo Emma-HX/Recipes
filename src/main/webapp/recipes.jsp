@@ -46,8 +46,7 @@
             <div class="sidebar">
                 <h5>Recipe Search</h5>
                 <form action="<%= request.getContextPath() %>/search" method="get" class="mb-3 d-flex">
-
-                <input type="text" class="form-control me-2" name="keyword" placeholder="Search...">
+                    <input type="text" class="form-control me-2" name="keyword" placeholder="Search...">
                     <button type="submit" class="btn btn-secondary">Search</button>
                 </form>
                 <h6>Categories</h6>
@@ -63,7 +62,6 @@
                         }
                     %>
                     <a href="recipesList" class="d-block mb-1">All Recipes</a>
-
                 </div>
             </div>
         </div>
@@ -78,14 +76,8 @@
                 <div class="col">
                     <a href="viewRecipe?id=<%=r.getRecipeId()%>" style="text-decoration:none; color:inherit;">
                         <div class="card h-100 shadow-sm">
-                            <img src="<%=
-    (r.getImagePath() != null && !r.getImagePath().isEmpty())
-        ? (r.getImagePath().startsWith("http")
-            ? r.getImagePath()
-            : request.getContextPath() + r.getImagePath())
-        : "https://via.placeholder.com/400x250?text=No+Image"
-%>" alt="Recipe Image" width="400" height="250">
-
+                            <img src="<%= (r.getImagePath() != null && !r.getImagePath().isEmpty()) ? request.getContextPath() + r.getImagePath() : "https://via.placeholder.com/400x250?text=No+Image" %>"
+                                 class="card-img-top" alt="Recipe Image" style="height:220px; object-fit:cover;">
                             <div class="card-body">
                                 <h5 class="card-title text-center"><%=r.getTitle()%></h5>
                             </div>

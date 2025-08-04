@@ -14,17 +14,33 @@ public class RecipesDAOImpl implements RecipesDAO {
      * @param recipe
      * @throws SQLException
      */
-    public void addRecipe(Recipe recipe) throws SQLException {
-        String sql = "INSERT INTO recipes (user_id, title, description, prepSteps) VALUES (?, ?, ?, ?)";
+    public int addRecipe(Recipe recipe) throws SQLException {
+        String sql = "INSERT INTO recipes (user_id, title, description, prepSteps, image_path) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
             ps.setInt(1, recipe.getUserId());
             ps.setString(2, recipe.getTitle());
             ps.setString(3, recipe.getDescription());
             ps.setString(4, recipe.getPrepSteps());
-            ps.executeUpdate();
+            ps.setString(5, recipe.getImagePath());
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Inserting recipe failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Inserting recipe failed, no ID obtained.");
+                }
+            }
         }
     }
+
 
     /**
      * get all recipes list

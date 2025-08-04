@@ -4,13 +4,17 @@ import com.group6.recipes.dao.*;
 import com.group6.recipes.model.*;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
+@MultipartConfig
 @WebServlet("/create_recipe")
 public class RecipeUploadServlet extends HttpServlet {
     private final RecipesDAOImpl recipesDAO = new RecipesDAOImpl();
@@ -41,23 +45,33 @@ public class RecipeUploadServlet extends HttpServlet {
         String title = req.getParameter("title");
         String description = req.getParameter("description");
         String prepSteps = req.getParameter("prepSteps");
-        String imageUrl = req.getParameter("imageUrl"); // URL enviada desde el formulario
+        // 1. upload image
+        Part imagePart = req.getPart("imageFile");
+        String imagePath = null;
+        String imagesDir = req.getServletContext().getRealPath("/images");
+        File dir = new File(imagesDir);
+        if (!dir.exists()) dir.mkdirs();
 
-        // Validar que la URL no sea demasiado larga
-        if (imageUrl != null && imageUrl.length() > 200) {
-            req.setAttribute("errorMessage", "The image URL is too long. Please use a new link (e.g., via TinyURL).");
+        if (imagePart != null && imagePart.getSize() > 0 && imagePart.getSubmittedFileName() != null && !imagePart.getSubmittedFileName().isEmpty()) {
+            // generate image file name
+            String submittedFileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+            String ext = "";
+            int dot = submittedFileName.lastIndexOf('.');
+            if (dot >= 0) ext = submittedFileName.substring(dot);
+            String newFileName = UUID.randomUUID() + ext;
+            File imageFile = new File(dir, newFileName);
 
-            // Recargar listas para que el JSP funcione correctamente
-            try {
-                req.setAttribute("allUnits", unitDAO.getAllUnits());
-                req.setAttribute("allCategories", categoryDAO.getAllCategories());
-            } catch (SQLException e) {
-                throw new ServletException("Error loading units and categories", e);
+            // save file
+            try (InputStream in = imagePart.getInputStream();
+                 OutputStream out = new FileOutputStream(imageFile)) {
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
+                }
             }
-
-            // Volver al formulario con mensaje de error
-            req.getRequestDispatcher("/create_recipe.jsp").forward(req, resp);
-            return; // detener procesamiento
+            // save relative path
+            imagePath = "/images/" + newFileName;
         }
 
         Recipe recipe = new Recipe();
@@ -65,14 +79,10 @@ public class RecipeUploadServlet extends HttpServlet {
         recipe.setTitle(title);
         recipe.setDescription(description);
         recipe.setPrepSteps(prepSteps);
-        recipe.setImagePath(imageUrl);  // Guardamos la URL directamente
+        recipe.setImagePath(imagePath);  // Guardamos la URL directamente
 
         try {
             int recipeId = recipesDAO.addRecipe(recipe);
-            if (recipeId == -1) {
-                throw new ServletException("Failed to retrieve generated recipe ID.");
-            }
-
             String[] categoryIds = req.getParameterValues("categories");
             if (categoryIds != null) {
                 for (String cid : categoryIds) {

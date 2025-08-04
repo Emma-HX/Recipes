@@ -40,8 +40,8 @@ public class RecipeEditServlet extends HttpServlet {
                     .map(RecipeCategory::getCategoryId)
                     .collect(Collectors.toList());
 
-            req.setAttribute("allCategories", allCategories); // 所有分类
-            req.setAttribute("selectedCategories", selectedCategories); // 当前已选分类id列表
+            req.setAttribute("allCategories", allCategories);
+            req.setAttribute("selectedCategories", selectedCategories);
 
             req.setAttribute("recipe", recipe);
             req.setAttribute("allUnits", allUnits);
