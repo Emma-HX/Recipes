@@ -10,7 +10,8 @@
     <title>Search Recipes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body><jsp:include page="header_template.jsp" />
+
 <div class="container mt-4">
     <h2>Search Recipes</h2>
     <p>DEBUG - contextPath = <%= request.getContextPath() %></p>

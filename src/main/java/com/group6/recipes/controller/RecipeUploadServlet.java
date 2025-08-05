@@ -41,7 +41,6 @@ public class RecipeUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId = 1; // Ajustar según autenticación
-
         String title = req.getParameter("title");
         String description = req.getParameter("description");
         String prepSteps = req.getParameter("prepSteps");
@@ -107,8 +106,7 @@ public class RecipeUploadServlet extends HttpServlet {
                 }
             }
 
-            req.setAttribute("successMessage", "Your recipe has been created successfully!");
-            req.getRequestDispatcher("/recipe_created.jsp").forward(req, resp);
+            resp.sendRedirect("recipeConfirmation?id=" + recipeId);
 
         } catch (Exception e) {
             throw new ServletException("Error creating recipe", e);
