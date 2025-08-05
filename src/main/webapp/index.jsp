@@ -66,9 +66,6 @@
       <span class="navbar-text me-3">
                           Welcome, <%= session.getAttribute("username") %>
                       </span>
-      <a class="nav-link" href="<%= request.getContextPath() %>/recipesList">Recipe List</a>
-      <a class="nav-link" href="<%= request.getContextPath() %>/uploadRecipe">Upload Recipe</a>
-      <a class="nav-link" href="<%= request.getContextPath() %>/search.jsp">Search Recipes</a>
       <a class="nav-link" href="<%= request.getContextPath() %>/logout">Logout</a>
       <% } else { %>
       <a class="nav-link" href="<%= request.getContextPath() %>/login">Login</a>
@@ -117,7 +114,7 @@
             <% } %>
           </p>
           <% if (session.getAttribute("user") != null) { %>
-          <a href="<%= request.getContextPath() %>/uploadRecipe" class="btn-custom">Upload Recipe</a>
+          <a href="<%= request.getContextPath() %>/create_recipe" class="btn-custom">Upload Recipe</a>
           <% } else { %>
           <a href="<%= request.getContextPath() %>/login" class="btn-custom">Log In</a>
           <% } %>

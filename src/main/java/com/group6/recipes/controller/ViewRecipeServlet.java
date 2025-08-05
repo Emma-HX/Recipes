@@ -11,6 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +22,10 @@ public class ViewRecipeServlet extends HttpServlet {
     private final RecipeIngredientDAOImpl recipeIngredientDAO = new RecipeIngredientDAOImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Check if user is logged in
+        HttpSession session = req.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+
         String idStr = req.getParameter("id");
         if (idStr == null) {
             resp.sendRedirect("recipes");
@@ -33,8 +39,13 @@ public class ViewRecipeServlet extends HttpServlet {
                 resp.sendRedirect("recipes");
                 return;
             }
+            // Check if the current user is the owner of this recipe
+            boolean isOwner = (userId != null && userId.equals(recipe.getUserId()));
+
             req.setAttribute("recipe", recipe);
             req.setAttribute("ingredientsList", ingredientsList);
+            req.setAttribute("isOwner", isOwner);
+            req.setAttribute("currentUserId", userId);
             req.getRequestDispatcher("/view_recipe.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new ServletException(e);

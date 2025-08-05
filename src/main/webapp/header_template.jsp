@@ -1,7 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<div style="display: flex; justify-content: flex-end; margin-top: 10px;">
-    <img src="<%= request.getContextPath() %>/images/logo.PNG"
-         alt="Delicious Recipe"
-         style="max-height: 130px; width: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 0 8px rgba(0,0,0,0.15);">
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="navbar-nav ms-auto">
+            <% if (session.getAttribute("user") != null) { %>
+            <span class="navbar-text me-3">
+                    Welcome, <%= session.getAttribute("username") %>
+                </span>
+            <a class="nav-link" href="<%= request.getContextPath() %>/logout">Logout</a>
+            <% } else { %>
+            <a class="nav-link" href="<%= request.getContextPath() %>/login">Login</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/register">Register</a>
+            <% } %>
+        </div>
+    </div>
+</nav>

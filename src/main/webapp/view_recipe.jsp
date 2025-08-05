@@ -38,6 +38,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="header_template.jsp" />
 <div class="container mt-4">
   <%
     Recipe recipe = (Recipe)request.getAttribute("recipe");
@@ -68,6 +69,10 @@
           <% }} %>
         </ol>
       </div>
+      <%
+        Boolean isOwner = (Boolean) request.getAttribute("isOwner");
+        if (isOwner != null && isOwner) {
+      %>
       <div class="mt-4 d-flex gap-2">
         <a href="editRecipe?id=<%=recipe.getRecipeId()%>" class="btn btn-warning">Edit</a>
         <form action="deleteRecipe" method="post" onsubmit="return confirm('Confirm to delete this recipe？');">
@@ -75,6 +80,9 @@
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
+      <%
+        }
+      %>
     </div>
   </div>
   <a href="recipesList" class="btn btn-secondary mt-4">Return to List</a>

@@ -1,4 +1,3 @@
-// src/main/java/com/group6/recipes/controller/RecipeEditServlet.java
 package com.group6.recipes.controller;
 
 import com.group6.recipes.dao.*;

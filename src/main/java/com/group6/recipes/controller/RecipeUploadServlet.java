@@ -40,7 +40,13 @@ public class RecipeUploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = 1; // TODO: adjust based on authenticated user
+        // Check if user is logged in
+        HttpSession session = req.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
 
         String title = req.getParameter("title");
         String description = req.getParameter("description");
