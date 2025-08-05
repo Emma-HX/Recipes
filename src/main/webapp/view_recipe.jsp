@@ -38,7 +38,6 @@
   </style>
 </head>
 <body>
-<jsp:include page="header_template.jsp" />
 <div class="container mt-4">
   <%
     Recipe recipe = (Recipe)request.getAttribute("recipe");

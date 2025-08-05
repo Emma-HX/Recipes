@@ -47,7 +47,6 @@
   </script>
 </head>
 <body>
-<jsp:include page="header_template.jsp" />
 <div class="container mt-4">
   <h2>Edit Recipe</h2>
   <form action="editRecipe" method="post" enctype="multipart/form-data">
