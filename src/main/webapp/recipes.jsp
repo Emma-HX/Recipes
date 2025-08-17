@@ -15,26 +15,7 @@
 <head>
     <title>Recipes List - Recipe Management</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        .sidebar {
-            min-width: 250px;
-            max-width: 300px;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .category-list span {
-            display: inline-block;
-            margin: 2px 6px 2px 0;
-            padding: 2px 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .category-list span:hover {
-            background: #d1e7dd;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <jsp:include page="header_template.jsp" />

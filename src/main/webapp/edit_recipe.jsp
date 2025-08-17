@@ -13,22 +13,7 @@
 <head>
   <title>Edit Recipe</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    .category-btn {
-      margin: 2px 4px 2px 0;
-      padding: 4px 12px;
-      border-radius: 16px;
-      border: 1px solid #ccc;
-      background: #f8f9fa;
-      cursor: pointer;
-    }
-    .category-btn.selected {
-      background: #d1e7dd;
-      border-color: #198754;
-      color: #198754;
-      font-weight: bold;
-    }
-  </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   <script>
     function addIngredientRow() {
       const container = document.getElementById('ingredients-container');

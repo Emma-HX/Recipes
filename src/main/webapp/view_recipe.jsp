@@ -14,28 +14,8 @@
 <head>
   <title>View Recipe - Recipe Management</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    .recipe-img {
-      width: 100%;
-      max-width: 250px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #f0f0f0;
-    }
-    .ingredients-box, .steps-box {
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      min-height: 200px;
-    }
-    .ingredients-box {
-      margin-top: 20px;
-    }
-    .steps-box {
-      margin-top: 20px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
 <jsp:include page="header_template.jsp" />

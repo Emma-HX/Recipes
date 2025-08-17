@@ -1,0 +1,446 @@
+/* ---------------------------
+   General body styling
+   --------------------------- */
+body {
+    background-color: #fafafa; /* default page background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------------------------
+   Headings
+   --------------------------- */
+h2 {
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.25rem;
+    letter-spacing: 1.5px;
+}
+
+/* ---------------------------
+   Forms
+   --------------------------- */
+form {
+    background: white;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+}
+
+label.form-label {
+    font-weight: 600;
+    color: #444;
+}
+
+/* ---------------------------
+   Category buttons
+   --------------------------- */
+.category-btn {
+    margin: 2px 4px 2px 0;
+    padding: 4px 12px;
+    border-radius: 16px;
+    border: 1px solid #ccc;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+.category-btn.selected {
+    background: #d1e7dd;
+    border-color: #198754;
+    color: #198754;
+    font-weight: bold;
+}
+
+/* ---------------------------
+   Ingredient rows
+   --------------------------- */
+.ingredient-row > div {
+    margin-bottom: 12px;
+}
+
+/* ---------------------------
+   Buttons
+   --------------------------- */
+button.btn-danger {
+    padding: 6px 14px;
+}
+button.btn-success {
+    font-size: 1.1rem;
+    padding: 10px 26px;
+}
+.btn-secondary {
+    font-size: 1rem;
+}
+
+/* ---------------------------
+   Alerts
+   --------------------------- */
+.alert {
+    max-width: 800px;
+    margin: 15px auto 20px auto;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+/* ---------------------------
+   Blue gradient background only for login/register
+   --------------------------- */
+body.login-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+/* ---------------------------
+   Login container
+   --------------------------- */
+.login-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.login-header h2 {
+    color: #333;
+    font-weight: 600;
+}
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+.btn-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+}
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ---------------------------
+   Hero and feature sections
+   --------------------------- */
+.hero-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 60px 40px;
+    margin: 40px 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+.btn-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+.welcome-text {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+.recipe-img {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f0f0f0;
+}
+.ingredients-box,
+.steps-box {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    min-height: 200px;
+}
+
+/* ---------------------------
+   Sidebar and categories
+   --------------------------- */
+.sidebar {
+    min-width: 250px;
+    max-width: 300px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+.category-list span {
+    display: inline-block;
+    margin: 2px 6px 2px 0;
+    padding: 2px 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.category-list span:hover {
+    background: #d1e7dd;
+}
+
+/* ---------------------------
+   Register container and forms
+   --------------------------- */
+.register-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.register-header h2 {
+    color: #333;
+    font-weight: 600;
+}
+.btn-register {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+}
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.navbar-container,
+.dr-navbar-container {
+    display: block; /* prevent flex inheritance */
+}
+.password-requirements {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* ---------------------------
+   Custom page styles (Delicious Recipes)
+   --------------------------- */
+.dr-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.dr-hero-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 60px 40px;
+    margin: 40px 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.dr-feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.dr-feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.dr-btn-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.dr-btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.dr-welcome-text {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ---------------------------
+   Custom login styles (Delicious Recipes)
+   --------------------------- */
+.dr-login-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dr-login-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.dr-login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.dr-login-header h2 {
+    color: #333;
+    font-weight: 600;
+}
+.dr-form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+.dr-form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+.dr-btn-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+}
+.dr-btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.dr-register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+.dr-alert {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.dr-navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 0.5rem 1rem;
+}
+.dr-navbar .navbar-nav .nav-link,
+.dr-navbar .navbar-text {
+    color: white;
+}
+.dr-navbar .navbar-nav .nav-link:hover {
+    color: #d1e7dd;
+}
+
+.register-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.register-header h2 {
+    color: #333;
+    font-weight: 600;
+}
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+.btn-register {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+}
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+.alert {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.password-requirements {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
