@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, java.util.Arrays" %>
 <%@ page import="com.group6.recipes.model.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +10,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script>
-        function addIngredientRow() {
+        function addIngredientRow(name = "", quantity = "", unitId = "") {
             const container = document.getElementById('ingredients-container');
             const template = document.getElementById('ingredient-row-template');
             const clone = template.content.cloneNode(true);
+            clone.querySelector('input[name="ingredientNames"]').value = name;
+            clone.querySelector('input[name="quantities"]').value = quantity;
+            if(unitId) {
+                clone.querySelector('select[name="unitIds"]').value = unitId;
+            }
             container.appendChild(clone);
         }
 
@@ -36,8 +41,6 @@
 <jsp:include page="header_template.jsp" />
 <div class="container">
     <h2>Create New Recipe</h2>
-    <div class="text-center mb-4">
-    </div>
 
     <% if (request.getAttribute("errorMessage") != null) { %>
     <div class="alert alert-danger text-center" role="alert">
@@ -62,17 +65,21 @@
 
         <div class="mb-4">
             <label for="title" class="form-label">Recipe Name</label>
-            <input type="text" id="title" name="title" class="form-control" placeholder="Enter recipe title" required />
+            <input type="text" id="title" name="title" class="form-control"
+                   placeholder="Enter recipe title" required
+                   value="<%= request.getParameter("title") != null ? request.getParameter("title") : "" %>" />
         </div>
 
         <div class="mb-4">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" name="description" rows="2" class="form-control" placeholder="Short description" required></textarea>
+            <textarea id="description" name="description" rows="2" class="form-control"
+                      placeholder="Short description" required><%= request.getParameter("description") != null ? request.getParameter("description") : "" %></textarea>
         </div>
 
         <div class="mb-4">
             <label for="prepSteps" class="form-label">Preparation Steps</label>
-            <textarea id="prepSteps" name="prepSteps" rows="5" class="form-control" placeholder="List preparation steps here" required></textarea>
+            <textarea id="prepSteps" name="prepSteps" rows="5" class="form-control"
+                      placeholder="List preparation steps here" required><%= request.getParameter("prepSteps") != null ? request.getParameter("prepSteps") : "" %></textarea>
         </div>
 
         <div class="mb-4">
@@ -80,11 +87,16 @@
             <div>
                 <%
                     List<Category> allCategories = (List<Category>)request.getAttribute("allCategories");
+                    String[] selectedCats = request.getParameterValues("categories");
                     if (allCategories != null) {
                         for (Category c : allCategories) {
                 %>
-                <button type="button" class="category-btn" onclick="toggleCategory(this, <%=c.getCategoryId()%>)"><%=c.getName()%></button>
-                <input type="checkbox" id="cat_<%=c.getCategoryId()%>" name="categories" value="<%=c.getCategoryId()%>" style="display:none;" />
+                <button type="button" class="category-btn <%= (selectedCats != null && Arrays.asList(selectedCats).contains(String.valueOf(c.getCategoryId()))) ? "selected" : "" %>"
+                        onclick="toggleCategory(this, <%=c.getCategoryId()%>)">
+                    <%=c.getName()%>
+                </button>
+                <input type="checkbox" id="cat_<%=c.getCategoryId()%>" name="categories" value="<%=c.getCategoryId()%>" style="display:none;"
+                        <%= (selectedCats != null && Arrays.asList(selectedCats).contains(String.valueOf(c.getCategoryId()))) ? "checked" : "" %> />
                 <%
                         }
                     }
@@ -95,6 +107,44 @@
         <div class="mb-4">
             <label class="form-label">Ingredients</label>
             <div id="ingredients-container">
+                <%
+                    String[] names = request.getParameterValues("ingredientNames");
+                    String[] quantities = request.getParameterValues("quantities");
+                    String[] unitIds = request.getParameterValues("unitIds");
+                    if (names != null && names.length > 0) {
+                        for (int i = 0; i < names.length; i++) {
+                %>
+                <div class="row ingredient-row align-items-center g-2">
+                    <div class="col-md-5">
+                        <input type="text" name="ingredientNames" class="form-control" placeholder="Ingredient Name" required
+                               value="<%= names[i] %>" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" name="quantities" step="0.01" min="0" class="form-control" placeholder="Quantity" required
+                               value="<%= quantities[i] %>" />
+                    </div>
+                    <div class="col-md-3">
+                        <select name="unitIds" class="form-select" required>
+                            <%
+                                List<Unit> allUnits = (List<Unit>)request.getAttribute("allUnits");
+                                if (allUnits != null) {
+                                    for (Unit u : allUnits) {
+                            %>
+                            <option value="<%=u.getUnitId()%>" <%= (unitIds[i].equals(String.valueOf(u.getUnitId()))) ? "selected" : "" %>><%=u.getUnitName()%></option>
+                            <%      }
+                            }
+                            %>
+                        </select>
+                    </div>
+                    <div class="col-md-1 d-grid">
+                        <button type="button" class="btn btn-danger" onclick="removeIngredientRow(this)" title="Remove ingredient">&times;</button>
+                    </div>
+                </div>
+                <%
+                    }
+                } else {
+                %>
+                <!-- Default one row if no ingredients yet -->
                 <div class="row ingredient-row align-items-center g-2">
                     <div class="col-md-5">
                         <input type="text" name="ingredientNames" class="form-control" placeholder="Ingredient Name" required />
@@ -110,13 +160,8 @@
                                     for (Unit u : allUnits) {
                             %>
                             <option value="<%=u.getUnitId()%>"><%=u.getUnitName()%></option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option disabled>No units available</option>
-                            <%
-                                }
+                            <%      }
+                            }
                             %>
                         </select>
                     </div>
@@ -124,6 +169,7 @@
                         <button type="button" class="btn btn-danger" onclick="removeIngredientRow(this)" title="Remove ingredient">&times;</button>
                     </div>
                 </div>
+                <% } %>
             </div>
             <button type="button" class="btn btn-outline-secondary mt-3" onclick="addIngredientRow()">+ Add Ingredient</button>
         </div>
